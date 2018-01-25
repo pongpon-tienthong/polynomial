@@ -37,9 +37,9 @@ public class Polynomial {
                 // if p1 + p2 = 0, then eliminate that term
                 if(polynomialMap.get(polynomialIn.getKey()) + polynomialIn.getValue() == 0) {
                     polynomialMap.remove(polynomialIn.getKey());
+                } else {
+                    polynomialMap.put(polynomialIn.getKey(), polynomialMap.get(polynomialIn.getKey()) + polynomialIn.getValue());
                 }
-
-                polynomialMap.put(polynomialIn.getKey(), polynomialMap.get(polynomialIn.getKey()) + polynomialIn.getValue());
             } else {
 
                 polynomialMap.put(polynomialIn.getKey(), polynomialIn.getValue());
