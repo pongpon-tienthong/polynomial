@@ -27,21 +27,21 @@ public class Polynomial {
     }
 
     // return p = p1 + p2
-    public Polynomial plus(Polynomial in) {
+    public Polynomial plus(Polynomial polynomialIn) {
 
-        for (Map.Entry<Integer, Integer> polynomialIn : in.polynomialMap.entrySet()) {
+        for (Map.Entry<Integer, Integer> polynomial : polynomialIn.getPolynomialMap().entrySet()) {
 
-            if (polynomialMap.containsKey(polynomialIn.getKey())) {
+            if (polynomialMap.containsKey(polynomial.getKey())) {
 
                 // if p1 + p2 = 0, then eliminate that term
-                if (polynomialMap.get(polynomialIn.getKey()) + polynomialIn.getValue() == 0) {
-                    polynomialMap.remove(polynomialIn.getKey());
+                if (polynomialMap.get(polynomial.getKey()) + polynomial.getValue() == 0) {
+                    polynomialMap.remove(polynomial.getKey());
                 } else {
-                    polynomialMap.put(polynomialIn.getKey(), polynomialMap.get(polynomialIn.getKey()) + polynomialIn.getValue());
+                    polynomialMap.put(polynomial.getKey(), polynomialMap.get(polynomial.getKey()) + polynomial.getValue());
                 }
             } else {
 
-                polynomialMap.put(polynomialIn.getKey(), polynomialIn.getValue());
+                polynomialMap.put(polynomial.getKey(), polynomial.getValue());
             }
         }
 
@@ -49,21 +49,21 @@ public class Polynomial {
     }
 
     // return p = p1 - p2
-    public Polynomial minus(Polynomial in) {
+    public Polynomial minus(Polynomial polynomialIn) {
 
-        for (Map.Entry<Integer, Integer> polynomialIn : in.polynomialMap.entrySet()) {
+        for (Map.Entry<Integer, Integer> polynomial : polynomialIn.getPolynomialMap().entrySet()) {
 
-            if (polynomialMap.containsKey(polynomialIn.getKey())) {
+            if (polynomialMap.containsKey(polynomial.getKey())) {
 
                 // if p1 + p2 = 0, then eliminate that term
-                if (polynomialMap.get(polynomialIn.getKey()) - polynomialIn.getValue() == 0) {
-                    polynomialMap.remove(polynomialIn.getKey());
+                if (polynomialMap.get(polynomial.getKey()) - polynomial.getValue() == 0) {
+                    polynomialMap.remove(polynomial.getKey());
                 } else {
-                    polynomialMap.put(polynomialIn.getKey(), polynomialMap.get(polynomialIn.getKey()) - polynomialIn.getValue());
+                    polynomialMap.put(polynomial.getKey(), polynomialMap.get(polynomial.getKey()) - polynomial.getValue());
                 }
             } else {
 
-                polynomialMap.put(polynomialIn.getKey(), -polynomialIn.getValue());
+                polynomialMap.put(polynomial.getKey(), -polynomial.getValue());
             }
         }
 
@@ -71,13 +71,13 @@ public class Polynomial {
     }
 
     // return p = p1 * p2
-    public Polynomial time(Polynomial in) {
+    public Polynomial time(Polynomial polynomialIn) {
 
         Polynomial polynomialTmp = new Polynomial();
         TreeMap<Integer, Integer> tmp = polynomialTmp.getPolynomialMap();
 
         for (Map.Entry<Integer, Integer> p1 : this.getPolynomialMap().entrySet()) {
-            for (Map.Entry<Integer, Integer> p2 : in.getPolynomialMap().entrySet()) {
+            for (Map.Entry<Integer, Integer> p2 : polynomialIn.getPolynomialMap().entrySet()) {
 
                 Integer degree = p1.getKey() + p2.getKey();
                 Integer coef = p1.getValue() * p2.getValue();
@@ -89,6 +89,32 @@ public class Polynomial {
                         tmp.put(degree, tmp.get(degree) + coef);
                     }
                 } else if (!tmp.containsKey(degree) && coef != 0) {
+                    tmp.put(degree, coef);
+                }
+            }
+        }
+
+        this.polynomialMap = tmp;
+
+        return this;
+    }
+
+    // return p = pʹ
+    public Polynomial differentiate() {
+
+        Polynomial polynomialTmp = new Polynomial();
+        TreeMap<Integer, Integer> tmp = polynomialTmp.getPolynomialMap();
+
+        if (this.getPolynomialMap().firstKey() != 0 || this.getPolynomialMap().size() != 1) {
+
+            tmp.remove(0);
+
+            for (Map.Entry<Integer, Integer> polynomial : this.getPolynomialMap().entrySet()) {
+
+                Integer degree = polynomial.getKey() - 1;
+                Integer coef = polynomial.getValue() * polynomial.getKey();
+
+                if (degree > -1) {
                     tmp.put(degree, coef);
                 }
             }

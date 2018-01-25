@@ -207,4 +207,52 @@ public class PolynomialTest {
         assertEquals(1, p1.getPolynomialMap().size());
         assertEquals(0, (int) p1.getPolynomialMap().get(0));
     }
+
+    @Test
+    public void test_differentiate_constant_return_zero() {
+
+        Polynomial p1 = new Polynomial(0, 7);
+
+        System.out.println(p1.differentiate());
+
+        assertEquals(1, p1.getPolynomialMap().size());
+        assertEquals(0, (int) p1.getPolynomialMap().get(0));
+    }
+
+    @Test
+    public void test_differentiate_polynomial_return_valid_polynomial() {
+
+        TreeMap<Integer, Integer> tmp1 = new TreeMap<>();
+        tmp1.put(0, 1);
+        tmp1.put(1, 1);
+        tmp1.put(3, 5);
+        tmp1.put(7, -2);
+
+        Polynomial p1 = new Polynomial(tmp1);
+
+        System.out.println(p1.differentiate());
+
+        assertEquals(3, p1.getPolynomialMap().size());
+        assertEquals(1, (int) p1.getPolynomialMap().get(0));
+        assertEquals(15, (int) p1.getPolynomialMap().get(2));
+        assertEquals(-14, (int) p1.getPolynomialMap().get(6));
+    }
+
+    @Test
+    public void test_differentiate_polynomial_two_times_return_valid_polynomial() {
+
+        TreeMap<Integer, Integer> tmp1 = new TreeMap<>();
+        tmp1.put(0, 1);
+        tmp1.put(1, 1);
+        tmp1.put(3, 5);
+        tmp1.put(7, -2);
+
+        Polynomial p1 = new Polynomial(tmp1);
+
+        System.out.println(p1.differentiate().differentiate());
+
+        assertEquals(2, p1.getPolynomialMap().size());
+        assertEquals(30, (int) p1.getPolynomialMap().get(1));
+        assertEquals(-84, (int) p1.getPolynomialMap().get(5));
+    }
 }
