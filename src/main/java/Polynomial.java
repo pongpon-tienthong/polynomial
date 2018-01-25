@@ -1,4 +1,3 @@
-import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -49,6 +48,29 @@ public class Polynomial {
         return this;
     }
 
+    // return p = p1 - p2
+    public Polynomial minus(Polynomial in) {
+
+        for(Map.Entry<Integer, Integer> polynomialIn : in.polynomialMap.entrySet()) {
+
+            if(polynomialMap.containsKey(polynomialIn.getKey())) {
+
+                // if p1 + p2 = 0, then eliminate that term
+                if(polynomialMap.get(polynomialIn.getKey()) - polynomialIn.getValue() == 0) {
+                    polynomialMap.remove(polynomialIn.getKey());
+                } else {
+                    polynomialMap.put(polynomialIn.getKey(), polynomialMap.get(polynomialIn.getKey()) - polynomialIn.getValue());
+                }
+            } else {
+
+                polynomialMap.put(polynomialIn.getKey(), -polynomialIn.getValue());
+            }
+        }
+
+        return this;
+    }
+
+    // return p = p1 * p2
     public Polynomial time(Polynomial in) {
 
         Polynomial polynomialTmp = new Polynomial();
