@@ -41,6 +41,7 @@ public class Polynomial {
 
                 polynomialMap.put(polynomialIn.getKey(), polynomialMap.get(polynomialIn.getKey()) + polynomialIn.getValue());
             } else {
+
                 polynomialMap.put(polynomialIn.getKey(), polynomialIn.getValue());
             }
         }
