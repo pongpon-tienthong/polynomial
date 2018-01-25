@@ -29,12 +29,12 @@ public class Polynomial {
     // return p = p1 + p2
     public Polynomial plus(Polynomial in) {
 
-        for(Map.Entry<Integer, Integer> polynomialIn : in.polynomialMap.entrySet()) {
+        for (Map.Entry<Integer, Integer> polynomialIn : in.polynomialMap.entrySet()) {
 
-            if(polynomialMap.containsKey(polynomialIn.getKey())) {
+            if (polynomialMap.containsKey(polynomialIn.getKey())) {
 
                 // if p1 + p2 = 0, then eliminate that term
-                if(polynomialMap.get(polynomialIn.getKey()) + polynomialIn.getValue() == 0) {
+                if (polynomialMap.get(polynomialIn.getKey()) + polynomialIn.getValue() == 0) {
                     polynomialMap.remove(polynomialIn.getKey());
                 } else {
                     polynomialMap.put(polynomialIn.getKey(), polynomialMap.get(polynomialIn.getKey()) + polynomialIn.getValue());
@@ -51,12 +51,12 @@ public class Polynomial {
     // return p = p1 - p2
     public Polynomial minus(Polynomial in) {
 
-        for(Map.Entry<Integer, Integer> polynomialIn : in.polynomialMap.entrySet()) {
+        for (Map.Entry<Integer, Integer> polynomialIn : in.polynomialMap.entrySet()) {
 
-            if(polynomialMap.containsKey(polynomialIn.getKey())) {
+            if (polynomialMap.containsKey(polynomialIn.getKey())) {
 
                 // if p1 + p2 = 0, then eliminate that term
-                if(polynomialMap.get(polynomialIn.getKey()) - polynomialIn.getValue() == 0) {
+                if (polynomialMap.get(polynomialIn.getKey()) - polynomialIn.getValue() == 0) {
                     polynomialMap.remove(polynomialIn.getKey());
                 } else {
                     polynomialMap.put(polynomialIn.getKey(), polynomialMap.get(polynomialIn.getKey()) - polynomialIn.getValue());
@@ -83,7 +83,7 @@ public class Polynomial {
                 Integer coef = p1.getValue() * p2.getValue();
 
                 if (tmp.containsKey(degree)) {
-                    if(tmp.get(degree) + coef == 0 && degree != 0) {
+                    if (tmp.get(degree) + coef == 0 && degree != 0) {
                         tmp.remove(degree);
                     } else {
                         tmp.put(degree, tmp.get(degree) + coef);
@@ -105,8 +105,10 @@ public class Polynomial {
         StringBuilder strBuilder = new StringBuilder("");
         for (Map.Entry<Integer, Integer> polynomial : polynomialMap.entrySet()) {
             if (polynomial.getKey() == 0) strBuilder.append(polynomial.getValue());
-            else if (polynomial.getValue() > 0) strBuilder.append(" + ").append(polynomial.getValue()).append("x^").append(polynomial.getKey());
-            else if (polynomial.getValue() < 0) strBuilder.append(" - ").append(-polynomial.getValue()).append("x^").append(polynomial.getKey());
+            else if (polynomial.getValue() > 0)
+                strBuilder.append(" + ").append(polynomial.getValue()).append("x^").append(polynomial.getKey());
+            else if (polynomial.getValue() < 0)
+                strBuilder.append(" - ").append(-polynomial.getValue()).append("x^").append(polynomial.getKey());
         }
 
         return strBuilder.toString();
