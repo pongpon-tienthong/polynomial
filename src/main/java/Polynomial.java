@@ -49,7 +49,35 @@ public class Polynomial {
         return this;
     }
 
-    // convert to string representation
+    public Polynomial time(Polynomial in) {
+
+        Polynomial polynomialTmp = new Polynomial();
+        TreeMap<Integer, Integer> tmp = polynomialTmp.getPolynomialMap();
+
+        for (Map.Entry<Integer, Integer> p1 : this.getPolynomialMap().entrySet()) {
+            for (Map.Entry<Integer, Integer> p2 : in.getPolynomialMap().entrySet()) {
+
+                Integer degree = p1.getKey() + p2.getKey();
+                Integer coef = p1.getValue() * p2.getValue();
+
+                if (tmp.containsKey(degree)) {
+                    if(tmp.get(degree) + coef == 0 && degree != 0) {
+                        tmp.remove(degree);
+                    } else {
+                        tmp.put(degree, tmp.get(degree) + coef);
+                    }
+                } else if (!tmp.containsKey(degree) && coef != 0) {
+                    tmp.put(degree, coef);
+                }
+            }
+        }
+
+        this.polynomialMap = tmp;
+
+        return this;
+    }
+
+    // convert polynomial to string
     public String toString() {
 
         StringBuilder strBuilder = new StringBuilder("");
