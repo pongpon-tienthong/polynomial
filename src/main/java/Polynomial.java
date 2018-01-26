@@ -26,7 +26,23 @@ public class Polynomial {
         return polynomialMap;
     }
 
-    // return p = p1 + p2
+    /**
+     * example:
+     * TreeMap<Integer, Integer> tmp1 = new TreeMap<>();
+     * tmp1.put(0, 1);
+     * tmp1.put(1, -2);
+     * tmp1.put(2, 1);
+     *
+     * TreeMap<Integer, Integer> tmp2 = new TreeMap<>();
+     * tmp2.put(0, -1);
+     * tmp2.put(1, 4);
+     * tmp2.put(3, -4);
+     *
+     * Polynomial p1 = new Polynomial(tmp1); // p1 = 1 - 2x + x^2
+     * Polynomial p2 = new Polynomial(tmp2); // p1 = -1 + 4x - 4x^3
+     *
+     * System.out.println(p1.plus(p2)); // p1 + p2 = 2x + x^2 - 4x^3
+     */
     public Polynomial plus(Polynomial polynomialIn) {
 
         for (Map.Entry<Integer, Integer> polynomial : polynomialIn.getPolynomialMap().entrySet()) {
